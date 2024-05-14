@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <section class="container">
+      <a href="/"><button class="btn btn-success my-3">Home</button></a>
+      <% if (data.length > 0) { %>
+        <% data.forEach(participant => { %>
+          <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+              <div class="col">
+                <img src="<%= participant.photo %>" class="img-fluid rounded-start" alt="Participant Image">
+
+              </div>
+              <div class="col">
+                <div class="card-body">
+                  <h5 class="card-title">TECH CONCLAVE</h5>
+                  <p class="card-text">Name: <span class="mx-3 text-danger"><%= participant.name %></span></p>
+                  <p class="card-text">Email: <span class="mx-3 text-danger"><%= participant.email %></span></p>
+                  <p class="card-text">Phone: <span class="mx-3 text-danger"><%= participant.phone %></span></p>
+                  <p class="card-text">Topic: <span class="mx-3 text-danger"><%= participant.topic %></span></p>
+                </div>
+              </div>
+              <div class="d-flex">
+                <form action="/participants/<%= participant._id %>?_method=DELETE" method="POST">
+                  <button class="btn btn-danger">DELETE</button>
+                </form>
+                <a href="/edit/<%= participant._id %>">
+                  <button class="btn btn-primary">EDIT</button>
+                </a>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p>No participants found.</p>
+      <% } %>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
